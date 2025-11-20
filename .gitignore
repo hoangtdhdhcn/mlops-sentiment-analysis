@@ -211,3 +211,4 @@ mlruns/
 # Personal file
 dvc/commands.txt
 data
+dvc.json
