@@ -1,0 +1,18 @@
+stages:
+
+  train:
+    cmd: python src/train.py
+    deps:
+      - src/train.py
+      - src/data/preprocessed/cleaned_sentiment_analysis_part1.xlsx
+    outs:
+      - src/checkpoints/logreg_model.pkl
+
+  evaluate:
+    cmd: python src/test.py
+    deps:
+      - src/test.py
+      - src/checkpoints/logreg_model.pkl
+      - src/data/preprocessed/cleaned_sentiment_analysis_part1.xlsx
+    metrics:
+      - src/results/eval_results.json
