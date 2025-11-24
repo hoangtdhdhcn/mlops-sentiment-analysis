@@ -221,6 +221,4 @@ prefect
 airflow
 .dvc/config
 =======
-data
-dvc.json
 >>>>>>> de940a5017a4206208bb5f7fbc05ee630da50691
