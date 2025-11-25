@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # # train.py
 # from data_preprocessing.data_preprocessing import load_and_split_data
 # from models.Logistic_Regression import SentimentModel
@@ -41,8 +40,6 @@
 
 
 
-=======
->>>>>>> de940a5017a4206208bb5f7fbc05ee630da50691
 # train.py
 from data_preprocessing.data_preprocessing import load_and_split_data
 from models.Logistic_Regression import SentimentModel
@@ -50,7 +47,6 @@ from sklearn.metrics import accuracy_score
 from datetime import datetime
 import os
 from utils.paths import PREPROCESSED_DIR, CHECKPOINT_DIR
-<<<<<<< HEAD
 import mlflow
 import mlflow.sklearn  # For logging sklearn models
 
@@ -100,8 +96,6 @@ def main():
         )
 
         print(f"MLflow run completed. Run ID: {mlflow.active_run().info.run_id}")
-=======
-
 
 def main():
     # Step 1: Load and split data
@@ -128,7 +122,6 @@ def main():
     print("Saving model to:", model_filename)
     # Save the model 
     model.save(model_filename)
->>>>>>> de940a5017a4206208bb5f7fbc05ee630da50691
 
 if __name__ == "__main__":
     main()

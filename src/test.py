@@ -5,13 +5,9 @@ from data_preprocessing.data_preprocessing import load_and_split_data
 from evaluation.evaluation import evaluate_model
 import joblib
 import os
-<<<<<<< HEAD
 from utils.paths import PREPROCESSED_DIR, CHECKPOINT_DIR, RESULT_DIR
 import json
 import pandas as pd
-=======
-from utils.paths import PREPROCESSED_DIR, CHECKPOINT_DIR
->>>>>>> de940a5017a4206208bb5f7fbc05ee630da50691
 
 def main():
     # Step 1: Load the test data (Reuse the same function for splitting data)
@@ -19,11 +15,7 @@ def main():
     X_train, X_test, y_train, y_test = load_and_split_data(input_file)
 
     # Step 2: Load the trained model
-<<<<<<< HEAD
     model_filename = os.path.join(CHECKPOINT_DIR, "logreg_model.pkl")   # Replace with the correct model file path
-=======
-    model_filename = 'checkpoints/logreg_model_2025-11-20_09-57-20.pkl'  # Replace with the correct model file path
->>>>>>> de940a5017a4206208bb5f7fbc05ee630da50691
     model = SentimentModel()
     model.load(model_filename)
 
@@ -40,7 +32,6 @@ def main():
     print(f"F1 Score: {metrics['f1_score']:.4f}")
     print(f"Confusion Matrix:\n{metrics['confusion_matrix']}")
 
-<<<<<<< HEAD
     # Step 6: Save metrics to JSON
     output_metrics_path = os.path.join(RESULT_DIR, "eval_results.json")
 
@@ -65,7 +56,5 @@ def main():
     df_results.to_csv(output_csv_path, index=False)
     print(f"Predictions saved to {output_csv_path}")
 
-=======
->>>>>>> de940a5017a4206208bb5f7fbc05ee630da50691
 if __name__ == "__main__":
     main()
