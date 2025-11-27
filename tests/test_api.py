@@ -2,7 +2,7 @@ import pytest
 from fastapi.testclient import TestClient
 from unittest.mock import patch, MagicMock
 
-from src.api.api import app
+from src.api.api_pytest import app
 
 client = TestClient(app)
 
@@ -10,7 +10,7 @@ client = TestClient(app)
 @pytest.fixture
 def mock_model():
     # Patch the model object inside the API
-    with patch("src.api.api.model", new=MagicMock()) as mock_model:
+    with patch("src.api.api_pytest.model", new=MagicMock()) as mock_model:
 
         # Create fake pipeline with predict()
         mock_pipeline = MagicMock()
