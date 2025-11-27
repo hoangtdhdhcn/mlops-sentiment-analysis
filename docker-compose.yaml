@@ -1,0 +1,27 @@
+# MLflow local
+
+version: "3.8"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sentiment_analysis_mlops:latest
+    container_name: sentiment-analysis-mlops
+    command: uvicorn src.api.api:app --host 0.0.0.0 --port 8000 --reload  # Correct the app location
+    ports:
+      - "8000:8000"
+    environment:
+      PYTHONUNBUFFERED: 1
+      # Use local MLflow store (inside the container)
+      MLFLOW_TRACKING_URI: file:/app/mlruns
+    # volumes:
+    #   # Mount local project folder to persist mlruns data
+    #   - .:/app
+    networks:
+      - mlflow-net
+
+networks:
+  mlflow-net:
+    driver: bridge

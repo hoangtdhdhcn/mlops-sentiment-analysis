@@ -15,9 +15,8 @@ pytest-cov==7.0.0
 python-multipart
 dvc
 dvc[gdrive]
-<<<<<<< HEAD
 #apache-airflow
 prefect
-=======
-apache-airflow
->>>>>>> de940a5017a4206208bb5f7fbc05ee630da50691
+prometheus-fastapi-instrumentator==7.1.0
+evidently
+apscheduler==3.10.4

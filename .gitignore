@@ -220,5 +220,8 @@ mlflow
 prefect
 airflow
 .dvc/config
-=======
->>>>>>> de940a5017a4206208bb5f7fbc05ee630da50691
+grafana
+prometheus
+promtail
+docker-compose_v1.yaml
+docker-compose_v2.yaml

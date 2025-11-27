@@ -1,0 +1,75 @@
+name: Run Tests & Build Docker Image
+
+# Trigger workflow
+# on:
+#   push:
+#     branches:
+#       - main  # This will run the workflow whenever there's a push to the 'main' branch
+
+# Trigger workflow
+# on:
+#   push:
+#     paths:
+#       - 'tests/**'          # any change in tests folder
+#       - 'scripts/**'          # any change in scripts folder
+
+#   pull_request:
+#     paths:
+#       - 'tests/**'          # any change in tests folder
+#       - 'scripts/**'          # any change in scripts folder
+
+on:
+  [workflow_dispatch]   # This enable run the workflow manually
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+        
+      # cache the dependencies so that workflow run faster
+      - name: Cache pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip        # folder to cache
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: pytest -v
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v4
+
+    - name: Log in to docker hub
+      uses: docker/login-action@v2
+      with:
+          username: hoang12b48
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build image using docker compose
+      run: |
+          docker compose -f docker-compose.yaml build
+
+    - name: Tag docker image
+      run: |
+          docker tag sentiment_analysis_mlops:latest hoang12b48/sentiment_analysis_mlops:latest
+
+    - name: Push docker image to docker hub
+      run: |
+          docker push hoang12b48/sentiment_analysis_mlops:latest
